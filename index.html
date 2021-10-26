@@ -9,12 +9,39 @@
   </head>
 
   <body>
+    <div id="searchWrapper">
+      <input
+        type="text"
+        name="searchBar"
+        id="searchBar"
+        placeholder="Search for an episode..."
+      />
+    </div>
     <div id="root"></div>
+
+    <div id="heading">
+      <h1>TV Episodes Full List</h1>
+    </div>
+
+    <div class="cards-container">
+      <!-- <div class="episode-card">
+        <div class="episode-name"></div>
+        <div class="episode-image"></div>
+        <div class="episode-code"></div>
+        <div class="episode-summary"></div>
+      </div> -->
+    </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
+    <footer>
+      <p>
+        All episode information has been provided by
+        <a href="https://www.tvmaze.com/">TVMaze.com</a>
+      </p>
+    </footer>
   </body>
 </html>

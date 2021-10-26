@@ -1,3 +1,37 @@
 #root {
-  color: red;
+  color: black;
+}
+
+#heading {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.episode-card {
+  background-color: lightyellow;
+  padding: 1.5em;
+  margin: 1rem;
+  width: 12rem;
+  border-style: groove;
+}
+
+.episode-summary {
+  font-style: italic;
+}
+
+.episode-name {
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  background-color: orange;
+}
+
+.episode-image {
+  justify-content: center;
+  max-width:100%;
+  max-height:100%;
 }
