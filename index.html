@@ -9,19 +9,33 @@
   </head>
 
   <body>
-    <div id="searchWrapper">
-      <input
-        type="text"
-        name="searchBar"
-        id="searchBar"
-        placeholder="Search for an episode..."
-      />
-    </div>
-    <div id="root"></div>
-
     <div id="heading">
-      <h1>TV Episodes Full List</h1>
+      <h1>Game of Throne Episodes</h1>
+      <div id="searchFindEp">
+        <div id="select-episode-div">
+        <label for="episodes">Select an episode: </label>
+        <select name="episodes" id="select-episodes">
+          <option>Show all episodes</option>
+        </select>
+      </div>
+      <div id="searchWrapper">
+        <input
+          type="text"
+          name="searchBar"
+          id="searchBar"
+          placeholder="Search for an episode..."
+        />
+      </div>
+      <div id="episodes-displayed"></div>
     </div>
+
+
+
+
+
+      </div>
+      
+      
 
     <div class="cards-container">
       <!-- <div class="episode-card">

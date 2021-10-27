@@ -2,11 +2,10 @@ function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 }
-let numOfHidden;
 
 function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
-  rootElem.textContent = `Displaying ${episodeList.length} episodes`;
+  const episodesDisplayed = document.getElementById("episodes-displayed");
+  episodesDisplayed.textContent = `Displaying ${episodeList.length} episodes`;
 
   //organise and display the episode data on the page
   episodeList.forEach((episode) => {
@@ -64,9 +63,35 @@ function makePageForEpisodes(episodeList) {
         card.style.display = "";
         card.classList.remove("hidden");
       }
+      // to display the number of episodes showing on the page
       let allHidden = document.getElementsByClassName("hidden");
       numDisplayed = episodeList.length - allHidden.length;
-      rootElem.textContent = `Displaying ${numDisplayed}/${episodeList.length} episodes`;
+      episodesDisplayed.textContent = `Displaying ${numDisplayed}/${episodeList.length} episodes`;
+    });
+
+    //add all episodes as options in the select input
+    let selectDropDown = document.getElementById("select-episodes");
+    let option = document.createElement("option");
+    let episodeOption = `${codeEpisode.innerHTML} - ${nameEpisode.innerHTML}`;
+    option.innerHTML = episodeOption;
+    option.value = codeEpisode.innerHTML; //the actual value is the episode code, so that I can use this value to match with the corresponding episode
+    selectDropDown.appendChild(option);
+
+    //add event listener to selected episode option, that shows that episode card only
+    selectDropDown.addEventListener("change", (e) => {
+      let optionSelected = e.target.value;
+      if (optionSelected === "Show all episodes") {
+        card.style.display = "";
+        episodesDisplayed.textContent = `Displaying ${episodeList.length} episodes`;
+        //to show all the episodes (removes any display:"none")
+        return;
+      } else if (optionSelected === codeEpisode.innerHTML) {
+        //to match with the corresponding episode code
+        card.style.display = "";
+        episodesDisplayed.textContent = `Displaying 1 episode`;   //hardcoded - always only show 1 episode, when selecting individual episodes options
+      } else {
+        card.style.display = "none";
+      }
     });
   });
 }

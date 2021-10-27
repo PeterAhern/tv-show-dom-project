@@ -1,37 +1,62 @@
-#root {
-  color: black;
-}
-
 #heading {
   text-align: center;
-  text-decoration: underline;
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  margin-top: -10rem;
+}
+
+h1 {
+  border-style: dashed;
+}
+
+#searchFindEp {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 1rem;
 }
 
 .cards-container {
   display: flex;
   flex-wrap: wrap;
+  background-color: #eae7dc;
+  margin-top: 10rem;
+  padding: 3rem;
 }
 
 .episode-card {
-  background-color: lightyellow;
+  background-color: #d8c3a5;
   padding: 1.5em;
   margin: 1rem;
   width: 12rem;
-  border-style: groove;
+  border-style: solid;
+  border-radius: 2%;
+}
+
+.episode-card:hover {
+  background-color: goldenrod;
+  /*find out how to change episode-name when hover over card
+  how to select episode name inside the hover.
+  also on hover, slightly increase image, to appear to select.
+  also summary text in bold, underline episode code and bolder*/
 }
 
 .episode-summary {
   font-style: italic;
+  color: black;
 }
 
 .episode-name {
   font-weight: bold;
-  padding-bottom: 0.5rem;
-  background-color: orange;
+  padding: 0.5rem;
+  background-color: #8e8d8a;
 }
 
 .episode-image {
   justify-content: center;
-  max-width:100%;
-  max-height:100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+#searchFindEp {
+  display: flex;
 }
