@@ -1,6 +1,14 @@
 function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
+  // const allEpisodes = getAllEpisodes();
+  let allEpisodes = fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then((response) => response.json())
+    .then((data) => {
+      allEpisodes = data;
+      makePageForEpisodes(allEpisodes);
+    })
+    .catch((err) => console.log(`Error: ${err}`));
+  // console.log(allEpisodes.resolve);
+  // makePageForEpisodes(allEpisodes);
 }
 
 function makePageForEpisodes(episodeList) {
@@ -88,7 +96,7 @@ function makePageForEpisodes(episodeList) {
       } else if (optionSelected === codeEpisode.innerHTML) {
         //to match with the corresponding episode code
         card.style.display = "";
-        episodesDisplayed.textContent = `Displaying 1 episode`;   //hardcoded - always only show 1 episode, when selecting individual episodes options
+        episodesDisplayed.textContent = `Displaying 1 episode`; //hardcoded - always only show 1 episode, when selecting individual episodes options
       } else {
         card.style.display = "none";
       }

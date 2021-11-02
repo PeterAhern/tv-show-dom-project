@@ -10,12 +10,18 @@
 
   <body>
     <div id="heading">
-      <h1>Game of Throne Episodes</h1>
+      <h1 id="show-name">Game of Throne Episodes</h1>
       <div id="searchFindEp">
+        <div id="show-selector">
+          <label for="episodes">Select a show: </label>
+        <select name="shows" id="select-show">
+          <option>All shows</option>
+        </select>
+        </div>
         <div id="select-episode-div">
         <label for="episodes">Select an episode: </label>
         <select name="episodes" id="select-episodes">
-          <option>Show all episodes</option>
+          <option>All episodes</option>
         </select>
       </div>
       <div id="searchWrapper">
@@ -47,7 +53,7 @@
     </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+    <!-- <script src="episodes.js"></script> -->
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
