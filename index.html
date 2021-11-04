@@ -14,34 +14,27 @@
       <div id="searchFindEp">
         <div id="show-selector">
           <label for="episodes">Select a show: </label>
-        <select name="shows" id="select-show">
-          <option>All shows</option>
-        </select>
+          <select name="shows" id="select-show">
+            <option>All shows</option>
+          </select>
         </div>
         <div id="select-episode-div">
-        <label for="episodes">Select an episode: </label>
-        <select name="episodes" id="select-episodes">
-          <option>All episodes</option>
-        </select>
+          <label for="episodes">Select an episode: </label>
+          <select name="episodes" id="select-episodes">
+            <option>All episodes</option>
+          </select>
+        </div>
+        <div id="searchWrapper">
+          <input
+            type="text"
+            name="searchBar"
+            id="searchBar"
+            placeholder="Search for an episode..."
+          />
+        </div>
+        <div id="episodes-displayed"></div>
       </div>
-      <div id="searchWrapper">
-        <input
-          type="text"
-          name="searchBar"
-          id="searchBar"
-          placeholder="Search for an episode..."
-        />
-      </div>
-      <div id="episodes-displayed"></div>
     </div>
-
-
-
-
-
-      </div>
-      
-      
 
     <div class="cards-container">
       <!-- <div class="episode-card">
@@ -54,7 +47,7 @@
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <!-- <script src="episodes.js"></script> -->
-
+    <script src="shows.js"></script>
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
     <footer>

@@ -1,14 +1,46 @@
 function setup() {
-  // const allEpisodes = getAllEpisodes();
   let allEpisodes = fetch("https://api.tvmaze.com/shows/82/episodes")
     .then((response) => response.json())
     .then((data) => {
-      allEpisodes = data;
-      makePageForEpisodes(allEpisodes);
+      makePageForEpisodes(data);
     })
     .catch((err) => console.log(`Error: ${err}`));
-  // console.log(allEpisodes.resolve);
-  // makePageForEpisodes(allEpisodes);
+
+  let allShows = getAllShows();
+  allShows.sort((a, b) => {
+    return (a.name > b.name && 1) || -1;
+  });
+
+  //add all shows as options in the select show input
+  allShows.forEach((show) => {
+    let selectShowDropDown = document.getElementById("select-show");
+    let optionEl = document.createElement("option");
+    let showOption = show.name;
+    optionEl.innerHTML = showOption;
+    optionEl.value = show.id;
+    selectShowDropDown.appendChild(optionEl);
+
+    //add event listener to select show option, that fetches the show data
+    selectShowDropDown.addEventListener("change", (e) => {
+      let showSelected = e.target.value;
+      console.log(showSelected);
+      if (showSelected === "All shows") {
+        // show a list of all shows on the screen
+
+        return;
+      } else if (showSelected === show.id) {
+        // fetch to get correct show data using ID
+        fetch(`https://api.tvmaze.com/shows/${showSelected}/episodes`)
+          .then((response) => response.json())
+          .then((data) => {
+            makePageForEpisodes(data);
+          })
+          .catch((err) => console.log(`Error: ${err}`));
+      } else {
+        console.log("Error");
+      }
+    });
+  });
 }
 
 function makePageForEpisodes(episodeList) {
@@ -88,7 +120,7 @@ function makePageForEpisodes(episodeList) {
     //add event listener to selected episode option, that shows that episode card only
     selectDropDown.addEventListener("change", (e) => {
       let optionSelected = e.target.value;
-      if (optionSelected === "Show all episodes") {
+      if (optionSelected === "All episodes") {
         card.style.display = "";
         episodesDisplayed.textContent = `Displaying ${episodeList.length} episodes`;
         //to show all the episodes (removes any display:"none")
