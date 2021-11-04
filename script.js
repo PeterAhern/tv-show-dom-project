@@ -1,47 +1,55 @@
 function setup() {
-  let allEpisodes = fetch("https://api.tvmaze.com/shows/82/episodes")
+  fetch("https://api.tvmaze.com/shows/82/episodes")
     .then((response) => response.json())
     .then((data) => {
       makePageForEpisodes(data);
     })
     .catch((err) => console.log(`Error: ${err}`));
-
-  let allShows = getAllShows();
-  allShows.sort((a, b) => {
-    return (a.name > b.name && 1) || -1;
-  });
-
-  //add all shows as options in the select show input
-  allShows.forEach((show) => {
-    let selectShowDropDown = document.getElementById("select-show");
-    let optionEl = document.createElement("option");
-    let showOption = show.name;
-    optionEl.innerHTML = showOption;
-    optionEl.value = show.id;
-    selectShowDropDown.appendChild(optionEl);
-
-    //add event listener to select show option, that fetches the show data
-    selectShowDropDown.addEventListener("change", (e) => {
-      let showSelected = e.target.value;
-      console.log(showSelected);
-      if (showSelected === "All shows") {
-        // show a list of all shows on the screen
-
-        return;
-      } else if (showSelected === show.id) {
-        // fetch to get correct show data using ID
-        fetch(`https://api.tvmaze.com/shows/${showSelected}/episodes`)
-          .then((response) => response.json())
-          .then((data) => {
-            makePageForEpisodes(data);
-          })
-          .catch((err) => console.log(`Error: ${err}`));
-      } else {
-        console.log("Error");
-      }
-    });
-  });
 }
+
+let allShows = getAllShows();
+allShows.sort((a, b) => {
+  return (a.name > b.name && 1) || -1;
+});
+
+let selectShowDropDown = document.getElementById("select-show");
+
+//add all shows as options in the select show input
+allShows.forEach((show) => {
+  let optionEl = document.createElement("option");
+  let showOption = show.name;
+  optionEl.innerHTML = showOption;
+  optionEl.value = show.id;
+  selectShowDropDown.appendChild(optionEl);
+});
+
+ let allPreviousCards = document.getElementsByClassName('episode-card');
+
+
+ //add event listener to select show option, that fetches the show data
+  selectShowDropDown.addEventListener("change", (e) => {
+    let showSelected = e.target.value;
+    console.log(showSelected);
+    if (showSelected === "All shows") {
+      // show a list of all shows on the screen
+
+      return;
+    } else if (showSelected !== "All shows") {
+      // fetch to get correct show data using ID
+      console.log("hello");
+      fetch(`https://api.tvmaze.com/shows/${showSelected}/episodes`)
+        .then((response) => response.json())
+        .then((showData) => {
+                for(let i=0; i<allPreviousCards.length; i++) {
+                  allPreviousCards[i].style.display = "none";
+                }
+          makePageForEpisodes(showData);
+        })
+        .catch((err) => console.log(`Error: ${err}`));
+    } else {
+      console.log("Error");
+    }
+  });
 
 function makePageForEpisodes(episodeList) {
   const episodesDisplayed = document.getElementById("episodes-displayed");
