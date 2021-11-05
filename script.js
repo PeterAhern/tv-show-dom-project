@@ -1,47 +1,55 @@
-function setup() {
-  fetch("https://api.tvmaze.com/shows/82/episodes")
-    .then((response) => response.json())
-    .then((data) => {
-      makePageForEpisodes(data);
-    })
-    .catch((err) => console.log(`Error: ${err}`));
-}
+// function setup() {
+//   fetch("https://api.tvmaze.com/shows/82/episodes")
+//     .then((response) => response.json())
+//     .then((data) => {
+//       makePageForEpisodes(data);
+//     })
+//     .catch((err) => console.log(`Error: ${err}`));
+// }
 
+
+//generate sorted list of all shows to add to drop down selection
 let allShows = getAllShows();
 allShows.sort((a, b) => {
   return (a.name > b.name && 1) || -1;
 });
-
+//create select option for shows, ID already defined in HTML file
 let selectShowDropDown = document.getElementById("select-show");
 
 //add all shows as options in the select show input
 allShows.forEach((show) => {
-  let optionEl = document.createElement("option");
+  let optionShow = document.createElement("option");
   let showOption = show.name;
-  optionEl.innerHTML = showOption;
-  optionEl.value = show.id;
-  selectShowDropDown.appendChild(optionEl);
+  optionShow.innerHTML = showOption;
+  optionShow.value = show.id;
+  selectShowDropDown.appendChild(optionShow);
 });
 
+// creating variables for all previous cards displaying on page
+// also for all the previous episodes in the select episode drop down list.
  let allPreviousCards = document.getElementsByClassName('episode-card');
+ let allPreviousEpisodesSelect = document.getElementsByClassName('episodeOptions');
 
 
  //add event listener to select show option, that fetches the show data
   selectShowDropDown.addEventListener("change", (e) => {
     let showSelected = e.target.value;
-    console.log(showSelected);
     if (showSelected === "All shows") {
       // show a list of all shows on the screen
+      removeElementsByClass("episode-card");
+      removeElementsByClass("episodeOptions");
 
       return;
     } else if (showSelected !== "All shows") {
       // fetch to get correct show data using ID
-      console.log("hello");
       fetch(`https://api.tvmaze.com/shows/${showSelected}/episodes`)
         .then((response) => response.json())
         .then((showData) => {
                 for(let i=0; i<allPreviousCards.length; i++) {
-                  allPreviousCards[i].style.display = "none";
+                  // allPreviousCards[i].style.display = "none";
+                  // allPreviousEpisodesSelect[i].style.display = "none";
+                  removeElementsByClass('episode-card');
+                  removeElementsByClass('episodeOptions');
                 }
           makePageForEpisodes(showData);
         })
@@ -50,6 +58,17 @@ allShows.forEach((show) => {
       console.log("Error");
     }
   });
+
+
+  //function to remove all elements of a certain class, to remove previous episode cards and lists options
+ function removeElementsByClass(className) {
+   const elements = document.getElementsByClassName(className);
+   while (elements.length > 0) {
+     elements[0].parentNode.removeChild(elements[0]);
+   }
+ }
+
+
 
 function makePageForEpisodes(episodeList) {
   const episodesDisplayed = document.getElementById("episodes-displayed");
@@ -119,11 +138,12 @@ function makePageForEpisodes(episodeList) {
 
     //add all episodes as options in the select input
     let selectDropDown = document.getElementById("select-episodes");
-    let option = document.createElement("option");
+    let optionEp = document.createElement("option");
+    optionEp.className = "episodeOptions";
     let episodeOption = `${codeEpisode.innerHTML} - ${nameEpisode.innerHTML}`;
-    option.innerHTML = episodeOption;
-    option.value = codeEpisode.innerHTML; //the actual value is the episode code, so that I can use this value to match with the corresponding episode
-    selectDropDown.appendChild(option);
+    optionEp.innerHTML = episodeOption;
+    optionEp.value = codeEpisode.innerHTML; //the actual value is the episode code, so that I can use this value to match with the corresponding episode
+    selectDropDown.appendChild(optionEp);
 
     //add event listener to selected episode option, that shows that episode card only
     selectDropDown.addEventListener("change", (e) => {
@@ -144,4 +164,4 @@ function makePageForEpisodes(episodeList) {
   });
 }
 
-window.onload = setup;
+// window.onload = setup;
