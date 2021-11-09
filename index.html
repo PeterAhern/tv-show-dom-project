@@ -29,21 +29,32 @@
             type="text"
             name="searchBar"
             id="searchBar"
-            placeholder="Search for an episode..."
+            placeholder="Search for a show..."
           />
         </div>
         <div id="episodes-displayed"></div>
       </div>
     </div>
 
-    <div class="cards-container">
-      <!-- <div class="episode-card">
-        <div class="episode-name"></div>
-        <div class="episode-image"></div>
-        <div class="episode-code"></div>
-        <div class="episode-summary"></div>
-      </div> -->
-    </div>
+    <main class="cards-container">
+      <article class="episode-card" id="episode-template">
+        <section class="episode-name"></section>
+        <section class="episode-image"></section>
+        <section class="episode-code"></section>
+        <section class="episode-summary"></section>
+      </article>
+
+      <article class="show-card" id="show-template">
+        <section class="show-name"></section>
+        <section class="show-image"></section>
+        <section class="show-code"></section>
+        <section class="show-summary"></section>
+        <section class="show-genre"></section>
+        <section class="show-status"></section>
+        <section class="show-rating"></section>
+        <section class="show-runtime"></section>
+      </article>
+    </main>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <!-- <script src="episodes.js"></script> -->
@@ -52,7 +63,7 @@
     <script src="script.js"></script>
     <footer>
       <p>
-        All episode information has been provided by
+        All TV Show & Episode information has been provided by
         <a href="https://www.tvmaze.com/">TVMaze.com</a>
       </p>
     </footer>
