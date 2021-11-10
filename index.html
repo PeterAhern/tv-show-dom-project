@@ -3,19 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
+    <title>TV Show Project | Peter Ahern (PeterAhern)</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-    <div id="root">
+    <div id="heading">
+      <h1 id="show-name">Find your favourite TV shows</h1>
+      <div id="searchFindEp">
+        <div id="show-selector">
+          <label for="episodes">Select a show: </label>
+          <select name="shows" id="select-show">
+            <option>All shows</option>
+          </select>
+        </div>
+        <div id="select-episode-div">
+          <label for="episodes">Select an episode: </label>
+          <select name="episodes" id="select-episodes">
+            <option>All episodes</option>
+          </select>
+        </div>
+        <div id="searchWrapper">
+          <input
+            type="text"
+            name="searchBar"
+            id="searchBar"
+            placeholder="Search for a show..."
+          />
+        </div>
+        <div id="episodes-displayed"></div>
+      </div>
     </div>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+    <main class="cards-container">
+      <article class="episode-card" id="episode-template">
+        <section class="episode-name"></section>
+        <section class="episode-image"></section>
+        <section class="episode-code"></section>
+        <section class="episode-summary"></section>
+      </article>
 
+      <article class="show-card" id="show-template">
+        <section class="show-name"></section>
+        <section class="show-image"></section>
+        <section class="show-code"></section>
+        <section class="show-summary"></section>
+        <section class="show-genre"></section>
+        <section class="show-status"></section>
+        <section class="show-rating"></section>
+        <section class="show-runtime"></section>
+      </article>
+    </main>
+
+    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
+    <!-- <script src="episodes.js"></script> -->
+    <script src="shows.js"></script>
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
+    <footer>
+      <p>
+        All TV Show & Episode information has been provided by
+        <a href="https://www.tvmaze.com/">TVMaze.com</a>
+      </p>
+    </footer>
   </body>
 </html>
